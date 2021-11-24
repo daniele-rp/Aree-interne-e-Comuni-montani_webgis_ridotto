@@ -1,0 +1,1954 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        #map {
+            width: 1331px;
+            height: 931px;
+        }
+        </style>
+        <title>Comuni Aree Interne e Comuni Montani</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/Province_0.js"></script>
+        <script src="data/Piemonte_1.js"></script>
+        <script src="data/ComuniPSR201420basea1206Com_2.js"></script>
+        <script src="data/ComuniperzonaaltimetricaIstatbasea1181Com_3.js"></script>
+        <script src="data/SNAIComuniAreeInterne2020basea1181Com_4.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[43.95199059603999,5.287853161546344],[46.525756208788806,10.502425504089151]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_Province_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DEN_PROV'] !== null ? autolinker.link(feature.properties['DEN_PROV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Province_0_0() {
+            return {
+                pane: 'pane_Province_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Province_0');
+        map.getPane('pane_Province_0').style.zIndex = 400;
+        map.getPane('pane_Province_0').style['mix-blend-mode'] = 'normal';
+        var layer_Province_0 = new L.geoJson(json_Province_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Province_0',
+            layerName: 'layer_Province_0',
+            pane: 'pane_Province_0',
+            onEachFeature: pop_Province_0,
+            style: style_Province_0_0,
+        });
+        bounds_group.addLayer(layer_Province_0);
+        function pop_Piemonte_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DEN_REG'] !== null ? autolinker.link(feature.properties['DEN_REG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Piemonte_1_0() {
+            return {
+                pane: 'pane_Piemonte_1',
+                opacity: 1,
+                color: 'rgba(54,53,55,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Piemonte_1');
+        map.getPane('pane_Piemonte_1').style.zIndex = 401;
+        map.getPane('pane_Piemonte_1').style['mix-blend-mode'] = 'normal';
+        var layer_Piemonte_1 = new L.geoJson(json_Piemonte_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Piemonte_1',
+            layerName: 'layer_Piemonte_1',
+            pane: 'pane_Piemonte_1',
+            onEachFeature: pop_Piemonte_1,
+            style: style_Piemonte_1_0,
+        });
+        bounds_group.addLayer(layer_Piemonte_1);
+        map.addLayer(layer_Piemonte_1);
+        function pop_ComuniPSR201420basea1206Com_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Comune montano_PSR (n.503+40 su 1.206)</th>\
+                        <td>' + (feature.properties['Comune montano_PSR (n.503+40 su 1.206)'] !== null ? autolinker.link(feature.properties['Comune montano_PSR (n.503+40 su 1.206)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">interamente o parzialmente montano</th>\
+                        <td>' + (feature.properties['Classe montana PSR'] !== null ? autolinker.link(feature.properties['Classe montana PSR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ComuniPSR201420basea1206Com_2_0(feature) {
+            switch(String(feature.properties['Classe montana PSR'])) {
+                case 'Interamente montano':
+                    return {
+                pane: 'pane_ComuniPSR201420basea1206Com_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(156,62,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Parzialmente montano':
+                    return {
+                pane: 'pane_ComuniPSR201420basea1206Com_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,134,27,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ComuniPSR201420basea1206Com_2');
+        map.getPane('pane_ComuniPSR201420basea1206Com_2').style.zIndex = 402;
+        map.getPane('pane_ComuniPSR201420basea1206Com_2').style['mix-blend-mode'] = 'normal';
+        var layer_ComuniPSR201420basea1206Com_2 = new L.geoJson(json_ComuniPSR201420basea1206Com_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ComuniPSR201420basea1206Com_2',
+            layerName: 'layer_ComuniPSR201420basea1206Com_2',
+            pane: 'pane_ComuniPSR201420basea1206Com_2',
+            onEachFeature: pop_ComuniPSR201420basea1206Com_2,
+            style: style_ComuniPSR201420basea1206Com_2_0,
+        });
+        bounds_group.addLayer(layer_ComuniPSR201420basea1206Com_2);
+        function pop_ComuniperzonaaltimetricaIstatbasea1181Com_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Comune Montagna interna_Istat (n.333 su 1.181)</th>\
+                        <td>' + (feature.properties['Comune Montagna interna_Istat (n.333 su 1.181)'] !== null ? autolinker.link(feature.properties['Comune Montagna interna_Istat (n.333 su 1.181)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">zona altimetrica</th>\
+                        <td>' + (feature.properties['zona altimetrica'] !== null ? autolinker.link(feature.properties['zona altimetrica'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_capoluogo</th>\
+                        <td>' + (feature.properties['quota_capoluogo'] !== null ? autolinker.link(feature.properties['quota_capoluogo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_min</th>\
+                        <td>' + (feature.properties['quota_min'] !== null ? autolinker.link(feature.properties['quota_min'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_max</th>\
+                        <td>' + (feature.properties['quota_max'] !== null ? autolinker.link(feature.properties['quota_max'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_media</th>\
+                        <td>' + (feature.properties['quota_media'] !== null ? autolinker.link(feature.properties['quota_media'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ComuniperzonaaltimetricaIstatbasea1181Com_3_0(feature) {
+            switch(String(feature.properties['zona altimetrica'])) {
+                case 'montagna':
+                    return {
+                pane: 'pane_ComuniperzonaaltimetricaIstatbasea1181Com_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(170,17,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ComuniperzonaaltimetricaIstatbasea1181Com_3');
+        map.getPane('pane_ComuniperzonaaltimetricaIstatbasea1181Com_3').style.zIndex = 403;
+        map.getPane('pane_ComuniperzonaaltimetricaIstatbasea1181Com_3').style['mix-blend-mode'] = 'normal';
+        var layer_ComuniperzonaaltimetricaIstatbasea1181Com_3 = new L.geoJson(json_ComuniperzonaaltimetricaIstatbasea1181Com_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ComuniperzonaaltimetricaIstatbasea1181Com_3',
+            layerName: 'layer_ComuniperzonaaltimetricaIstatbasea1181Com_3',
+            pane: 'pane_ComuniperzonaaltimetricaIstatbasea1181Com_3',
+            onEachFeature: pop_ComuniperzonaaltimetricaIstatbasea1181Com_3,
+            style: style_ComuniperzonaaltimetricaIstatbasea1181Com_3_0,
+        });
+        bounds_group.addLayer(layer_ComuniperzonaaltimetricaIstatbasea1181Com_3);
+        function pop_SNAIComuniAreeInterne2020basea1181Com_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Comune Aree Interne (n.388 su 1.181)</th>\
+                        <td>' + (feature.properties['Comune Aree Interne (n.388 su 1.181)'] !== null ? autolinker.link(feature.properties['Comune Aree Interne (n.388 su 1.181)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia</th>\
+                        <td>' + (feature.properties['Provincia'] !== null ? autolinker.link(feature.properties['Provincia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">classificazione Comune Aree Interne</th>\
+                        <td>' + (feature.properties['classificazione Comune Aree Interne'] !== null ? autolinker.link(feature.properties['classificazione Comune Aree Interne'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SNAIComuniAreeInterne2020basea1181Com_4_0(feature) {
+            switch(String(feature.properties['classificazione Comune Aree Interne'])) {
+                case 'D - Intermedio':
+                    return {
+                pane: 'pane_SNAIComuniAreeInterne2020basea1181Com_4',
+                opacity: 1,
+                color: 'rgba(54,54,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,208,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'E - Periferico':
+                    return {
+                pane: 'pane_SNAIComuniAreeInterne2020basea1181Com_4',
+                opacity: 1,
+                color: 'rgba(54,54,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(250,155,177,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'F - Ultraperiferico':
+                    return {
+                pane: 'pane_SNAIComuniAreeInterne2020basea1181Com_4',
+                opacity: 1,
+                color: 'rgba(54,54,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(95,11,93,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_SNAIComuniAreeInterne2020basea1181Com_4');
+        map.getPane('pane_SNAIComuniAreeInterne2020basea1181Com_4').style.zIndex = 404;
+        map.getPane('pane_SNAIComuniAreeInterne2020basea1181Com_4').style['mix-blend-mode'] = 'normal';
+        var layer_SNAIComuniAreeInterne2020basea1181Com_4 = new L.geoJson(json_SNAIComuniAreeInterne2020basea1181Com_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SNAIComuniAreeInterne2020basea1181Com_4',
+            layerName: 'layer_SNAIComuniAreeInterne2020basea1181Com_4',
+            pane: 'pane_SNAIComuniAreeInterne2020basea1181Com_4',
+            onEachFeature: pop_SNAIComuniAreeInterne2020basea1181Com_4,
+            style: style_SNAIComuniAreeInterne2020basea1181Com_4_0,
+        });
+        bounds_group.addLayer(layer_SNAIComuniAreeInterne2020basea1181Com_4);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Comuni Aree Interne e Comuni Montani</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'topright'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+                    this._div.setAttribute("onmouseenter", "abstract.show()");
+                    this._div.setAttribute("onmouseleave", "abstract.hide()");
+                    this.hide();
+                    return this._div;
+                };
+                abstract.hide = function () {
+                    this._div.classList.remove("abstractUncollapsed");
+                    this._div.classList.add("abstract");
+                    this._div.innerHTML = 'i'
+                }
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'I Comuni Aree interne sono suddivisi in \'Intermedi\', \'Periferici\' e \'Ultraperiferici\' (base a 1.206 Comuni) in funzione della distanza da un \'polo comunale\' in grado di offrire servizi pubblici essenziali (socio-sanitari, di istruzione, di mobilità-TPL).<br /><br />L\'attribuzione del carattere di "montanità" è ripreso dalle classificazioni per Zona altimetrica Istat (base a 1.181 Comuni, anno 2021) e PSR 2014-20 Piemonte (base a 1.206 Comuni, anno 2014).<br /><br />Elaborazioni: Regione Piemonte, Settore "Sviluppo della Montagna" (nov.2021).';
+            };
+            abstract.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'SNAI - Comuni Aree Interne 2020 (base a 1181Com.)<br /><table><tr><td style="text-align: center;"><img src="legend/SNAIComuniAreeInterne2020basea1181Com_4_DIntermedio0.png" /></td><td>D - Intermedio</td></tr><tr><td style="text-align: center;"><img src="legend/SNAIComuniAreeInterne2020basea1181Com_4_EPeriferico1.png" /></td><td>E - Periferico</td></tr><tr><td style="text-align: center;"><img src="legend/SNAIComuniAreeInterne2020basea1181Com_4_FUltraperiferico2.png" /></td><td>F - Ultraperiferico</td></tr></table>': layer_SNAIComuniAreeInterne2020basea1181Com_4,'Comuni per zona altimetrica Istat (base a 1181Com.)<br /><table><tr><td style="text-align: center;"><img src="legend/ComuniperzonaaltimetricaIstatbasea1181Com_3_montagnainterna3330.png" /></td><td>montagna interna (333)</td></tr></table>': layer_ComuniperzonaaltimetricaIstatbasea1181Com_3,'Comuni PSR 2014-20 (base a 1206Com.)<br /><table><tr><td style="text-align: center;"><img src="legend/ComuniPSR201420basea1206Com_2_Interamentemontano5030.png" /></td><td>Interamente montano (503)</td></tr><tr><td style="text-align: center;"><img src="legend/ComuniPSR201420basea1206Com_2_Parzialmentemontano401.png" /></td><td>Parzialmente montano (40)</td></tr></table>': layer_ComuniPSR201420basea1206Com_2,'<img src="legend/Piemonte_1.png" /> Piemonte': layer_Piemonte_1,'<img src="legend/Province_0.png" /> Province': layer_Province_0,},{collapsed:false}).addTo(map);L.control.scale({position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}).addTo(map);
+        setBounds();
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"classificazione Comune Aree Interne": "str","Comune montano_PSR (n.503+40 su 1.206)": "str","Comune Montagna interna_Istat (n.333 su 1.181)": "str","Comune Aree Interne (n.388 su 1.181)": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_classificazioneComuneAreeInterne = document.createElement('div');
+            div_classificazioneComuneAreeInterne.id = "div_classificazioneComuneAreeInterne";
+            div_classificazioneComuneAreeInterne.className= "filterselect";
+            document.getElementById("menu").appendChild(div_classificazioneComuneAreeInterne);
+            sel_classificazioneComuneAreeInterne = document.createElement('select');
+            sel_classificazioneComuneAreeInterne.multiple = true;
+            sel_classificazioneComuneAreeInterne.size = 3;
+            sel_classificazioneComuneAreeInterne.id = "sel_classificazioneComuneAreeInterne";
+            var classificazioneComuneAreeInterne_options_str = "<option value='' unselected></option>";
+            sel_classificazioneComuneAreeInterne.onchange = function(){filterFunc()};
+            classificazioneComuneAreeInterne_options_str  += '<option value="D - Intermedio">D - Intermedio</option>';
+            classificazioneComuneAreeInterne_options_str  += '<option value="E - Periferico">E - Periferico</option>';
+            classificazioneComuneAreeInterne_options_str  += '<option value="F - Ultraperiferico">F - Ultraperiferico</option>';
+            sel_classificazioneComuneAreeInterne.innerHTML = classificazioneComuneAreeInterne_options_str;
+            div_classificazioneComuneAreeInterne.appendChild(sel_classificazioneComuneAreeInterne);
+            var lab_classificazioneComuneAreeInterne = document.createElement('div');
+            lab_classificazioneComuneAreeInterne.innerHTML = 'classificazione Comune Aree Interne';
+            lab_classificazioneComuneAreeInterne.className = 'filterlabel';
+            div_classificazioneComuneAreeInterne.appendChild(lab_classificazioneComuneAreeInterne);
+            var reset_classificazioneComuneAreeInterne = document.createElement('div');
+            reset_classificazioneComuneAreeInterne.innerHTML = 'clear filter';
+            reset_classificazioneComuneAreeInterne.className = 'filterlabel';
+            reset_classificazioneComuneAreeInterne.onclick = function() {
+                var options = document.getElementById("sel_classificazioneComuneAreeInterne").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_classificazioneComuneAreeInterne.appendChild(reset_classificazioneComuneAreeInterne);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Comunemontano_PSRn50340su1206 = document.createElement('div');
+            div_Comunemontano_PSRn50340su1206.id = "div_Comunemontano_PSRn50340su1206";
+            div_Comunemontano_PSRn50340su1206.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Comunemontano_PSRn50340su1206);
+            sel_Comunemontano_PSRn50340su1206 = document.createElement('select');
+            sel_Comunemontano_PSRn50340su1206.multiple = true;
+            sel_Comunemontano_PSRn50340su1206.size = 10;
+            sel_Comunemontano_PSRn50340su1206.id = "sel_Comunemontano_PSRn50340su1206";
+            var Comunemontano_PSRn50340su1206_options_str = "<option value='' unselected></option>";
+            sel_Comunemontano_PSRn50340su1206.onchange = function(){filterFunc()};
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Acceglio">Acceglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ailoche">Ailoche</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Aisone">Aisone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ala di Stura">Ala di Stura</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Alagna Valsesia">Alagna Valsesia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Albaretto della Torre">Albaretto della Torre</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Albera Ligure">Albera Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Alice Superiore">Alice Superiore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Almese">Almese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Alpette">Alpette</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Alto">Alto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ameno">Ameno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Andorno Micca">Andorno Micca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Andrate">Andrate</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Angrogna">Angrogna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Antrona Schieranco">Antrona Schieranco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Anzola d&apos;Ossola">Anzola d&apos;Ossola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Argentera">Argentera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Arguello">Arguello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Arizzano">Arizzano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Armeno">Armeno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Arola">Arola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Arquata Scrivia">Arquata Scrivia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Aurano">Aurano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Avigliana">Avigliana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Avolasca">Avolasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Baceno">Baceno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bagnasco">Bagnasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bagnolo Piemonte">Bagnolo Piemonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Balangero">Balangero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Balme">Balme</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Balmuccia">Balmuccia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bannio Anzino">Bannio Anzino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bardonecchia">Bardonecchia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Barge">Barge</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Battifollo">Battifollo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Baveno">Baveno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bee">Bee</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bellino">Bellino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Belvedere Langhe">Belvedere Langhe</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Benevello">Benevello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bergolo">Bergolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bernezzo">Bernezzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Beura-Cardezza">Beura-Cardezza</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bibiana">Bibiana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Biella">Biella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bioglio">Bioglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bobbio Pellice">Bobbio Pellice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Boccioleto">Boccioleto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bognanco">Bognanco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bonvicino">Bonvicino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borghetto di Borbera">Borghetto di Borbera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgiallo">Borgiallo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgo San Dalmazzo">Borgo San Dalmazzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgofranco d&apos;Ivrea">Borgofranco d&apos;Ivrea</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgomale">Borgomale</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgone Susa">Borgone Susa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Borgosesia">Borgosesia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bosia">Bosia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bosio">Bosio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bossolasco">Bossolasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Boves">Boves</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Breia">Breia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Briaglia">Briaglia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bricherasio">Bricherasio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Briga Alta">Briga Alta</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Brignano-Frascata">Brignano-Frascata</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Brondello">Brondello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Brossasco">Brossasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Brosso">Brosso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Brovello-Carpugnino">Brovello-Carpugnino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bruzolo">Bruzolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bubbio">Bubbio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Busca">Busca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Bussoleno">Bussoleno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cabella Ligure">Cabella Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cafasse">Cafasse</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Calasca-Castiglione">Calasca-Castiglione</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Callabiana">Callabiana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Camandona">Camandona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cambiasca">Cambiasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Camburzano">Camburzano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Camerana">Camerana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Campertogno">Campertogno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Campiglia Cervo">Campiglia Cervo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Canischio">Canischio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cannero Riviera">Cannero Riviera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cannobio">Cannobio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Canosio">Canosio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cantalupa">Cantalupa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cantalupo Ligure">Cantalupo Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cantoira">Cantoira</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caprauna">Caprauna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caprezzo">Caprezzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caprie">Caprie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caprile">Caprile</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caraglio">Caraglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Carcoforo">Carcoforo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Carema">Carema</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Carrega Ligure">Carrega Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Carrosio">Carrosio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cartignano">Cartignano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cartosio">Cartosio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Casale Corte Cerro">Casale Corte Cerro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Casaleggio Boiro">Casaleggio Boiro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Casapinta">Casapinta</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Casasco">Casasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Caselette">Caselette</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cassinasco">Cassinasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cassinelle">Cassinelle</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Casteldelfino">Casteldelfino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castellamonte">Castellamonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castellania">Castellania</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castellar">Castellar</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castelletto Uzzone">Castelletto Uzzone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castelletto d&apos;Erro">Castelletto d&apos;Erro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castellino Tanaro">Castellino Tanaro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castelmagno">Castelmagno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castelnuovo Nigra">Castelnuovo Nigra</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castelnuovo di Ceva">Castelnuovo di Ceva</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Castino">Castino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cavaglio-Spoccia">Cavaglio-Spoccia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cavatore">Cavatore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Celle di Macra">Celle di Macra</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cellio">Cellio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ceppo Morelli">Ceppo Morelli</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ceres">Ceres</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ceresole Reale">Ceresole Reale</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cerreto Castello">Cerreto Castello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cerretto Langhe">Cerretto Langhe</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cervasca">Cervasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cervatto">Cervatto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cesana Torinese">Cesana Torinese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cesara">Cesara</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cessole">Cessole</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ceva">Ceva</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chialamberto">Chialamberto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chianocco">Chianocco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chiesanuova">Chiesanuova</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chiomonte">Chiomonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chiusa di Pesio">Chiusa di Pesio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Chiusa di San Michele">Chiusa di San Michele</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cigliè">Cigliè</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cintano">Cintano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cissone">Cissone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Civiasco">Civiasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Claviere">Claviere</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Coassolo Torinese">Coassolo Torinese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Coazze">Coazze</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Coggiola">Coggiola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Colazza">Colazza</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Colleretto Castelnuovo">Colleretto Castelnuovo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Condove">Condove</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Corio">Corio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cortemilia">Cortemilia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cossato">Cossato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cossogno">Cossogno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Costa Vescovato">Costa Vescovato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Costigliole Saluzzo">Costigliole Saluzzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cravagliana">Cravagliana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cravanzana">Cravanzana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Craveggia">Craveggia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Crevacuore">Crevacuore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Crevoladossola">Crevoladossola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Crissolo">Crissolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Crodo">Crodo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Crosa">Crosa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cumiana">Cumiana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cuorgnè">Cuorgnè</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Curino">Curino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Cursolo-Orasso">Cursolo-Orasso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Demonte">Demonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Denice">Denice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Dernice">Dernice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Domodossola">Domodossola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Donato">Donato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Dronero">Dronero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Druogno">Druogno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Elva">Elva</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Entracque">Entracque</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Envie">Envie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Exilles">Exilles</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Fabbrica Curone">Fabbrica Curone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Falmenta">Falmenta</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Feisoglio">Feisoglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Fenestrelle">Fenestrelle</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Fiano">Fiano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Fobello">Fobello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Formazza">Formazza</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Forno Canavese">Forno Canavese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Frabosa Soprana">Frabosa Soprana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Frabosa Sottana">Frabosa Sottana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Fraconalto">Fraconalto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Frassinetto">Frassinetto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Frassino">Frassino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Frossasco">Frossasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gaiola">Gaiola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gambasca">Gambasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Garbagna">Garbagna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Garessio">Garessio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Germagnano">Germagnano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Germagno">Germagno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ghiffa">Ghiffa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Giaglione">Giaglione</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Giaveno">Giaveno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gignese">Gignese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Givoletto">Givoletto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gorzegno">Gorzegno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gottasecca">Gottasecca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Graglia">Graglia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gravellona Toce">Gravellona Toce</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gravere">Gravere</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gremiasco">Gremiasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Grignasco">Grignasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Grondona">Grondona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Groscavallo">Groscavallo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Guardabosone">Guardabosone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Gurro">Gurro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Igliano">Igliano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ingria">Ingria</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Intragna">Intragna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Inverso Pinasca">Inverso Pinasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Isasca">Isasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Issiglio">Issiglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="La Cassa">La Cassa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lanzo Torinese">Lanzo Torinese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lemie">Lemie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lequio Berria">Lequio Berria</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lerma">Lerma</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lesegno">Lesegno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lessona">Lessona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Levice">Levice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Levone">Levone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Limone Piemonte">Limone Piemonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lisio">Lisio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Loazzolo">Loazzolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Locana">Locana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Loreglia">Loreglia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lugnacco">Lugnacco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Luserna San Giovanni">Luserna San Giovanni</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Lusernetta">Lusernetta</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Macra">Macra</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Macugnaga">Macugnaga</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Madonna del Sasso">Madonna del Sasso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Magliano Alpi">Magliano Alpi</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Magnano">Magnano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Malesco">Malesco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Malvicino">Malvicino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Manta">Manta</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Marmora">Marmora</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Marsaglia">Marsaglia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Martiniana Po">Martiniana Po</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Masera">Masera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Massello">Massello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Massino Visconti">Massino Visconti</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Massiola">Massiola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mathi">Mathi</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mattie">Mattie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Meana di Susa">Meana di Susa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Melle">Melle</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Merana">Merana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mergozzo">Mergozzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Meugliano">Meugliano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mezzana Mortigliengo">Mezzana Mortigliengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mezzenile">Mezzenile</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Miagliano">Miagliano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Miasino">Miasino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Miazzina">Miazzina</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Moiola">Moiola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Molare">Molare</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mollia">Mollia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mombaldone">Mombaldone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mombarcaro">Mombarcaro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mombasiglio">Mombasiglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mompantero">Mompantero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Momperone">Momperone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monastero Bormida">Monastero Bormida</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monastero di Lanzo">Monastero di Lanzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monastero di Vasco">Monastero di Vasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monasterolo Casotto">Monasterolo Casotto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Moncenisio">Moncenisio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monesiglio">Monesiglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mongiardino Ligure">Mongiardino Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mongrando">Mongrando</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monleale">Monleale</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montacuto">Montacuto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montaldo di Mondovì">Montaldo di Mondovì</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montechiaro d&apos;Acqui">Montechiaro d&apos;Acqui</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montecrestese">Montecrestese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montegioco">Montegioco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montemale di Cuneo">Montemale di Cuneo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montemarzino">Montemarzino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Monterosso Grana">Monterosso Grana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montescheno">Montescheno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Montezemolo">Montezemolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Morbello">Morbello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mornese">Mornese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Mosso">Mosso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Murazzano">Murazzano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Muzzano">Muzzano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Nebbiuno">Nebbiuno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Netro">Netro</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Niella Belbo">Niella Belbo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Noasca">Noasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Nomaglio">Nomaglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Nonio">Nonio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Novalesa">Novalesa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Nucetto">Nucetto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Occhieppo Inferiore">Occhieppo Inferiore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Occhieppo Superiore">Occhieppo Superiore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Oggebbio">Oggebbio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Olmo Gentile">Olmo Gentile</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Omegna">Omegna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Oncino">Oncino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ormea">Ormea</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ornavasso">Ornavasso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ostana">Ostana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Oulx">Oulx</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Paesana">Paesana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pagno">Pagno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pallanzeno">Pallanzeno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pamparato">Pamparato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pareto">Pareto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Paroldo">Paroldo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pecco">Pecco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Perletto">Perletto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Perlo">Perlo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Perosa Argentina">Perosa Argentina</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Perrero">Perrero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pertusio">Pertusio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pessinetto">Pessinetto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pettinengo">Pettinengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Peveragno">Peveragno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pezzolo Valle Uzzone">Pezzolo Valle Uzzone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pianfei">Pianfei</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piasco">Piasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piatto">Piatto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piedicavallo">Piedicavallo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piedimulera">Piedimulera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pietraporzio">Pietraporzio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pieve Vergonte">Pieve Vergonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pila">Pila</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pinasca">Pinasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pinerolo">Pinerolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piode">Piode</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Piossasco">Piossasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pisano">Pisano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pogno">Pogno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pollone">Pollone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pomaretto">Pomaretto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pont-Canavese">Pont-Canavese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pontechianale">Pontechianale</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ponzone">Ponzone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Porte">Porte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Portula">Portula</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Postua">Postua</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pozzol Groppo">Pozzol Groppo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pradleves">Pradleves</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pragelato">Pragelato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Prali">Prali</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pralungo">Pralungo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pramollo">Pramollo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Prarostino">Prarostino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Prascorsano">Prascorsano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pratiglione">Pratiglione</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Pray">Pray</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Prazzo">Prazzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Premeno">Premeno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Premia">Premia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Premosello-Chiovenda">Premosello-Chiovenda</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Priero">Priero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Priola">Priola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Prunetto">Prunetto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quaregna">Quaregna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quarna Sopra">Quarna Sopra</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quarna Sotto">Quarna Sotto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quarona">Quarona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quassolo">Quassolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quincinetto">Quincinetto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Quittengo">Quittengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rassa">Rassa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Re">Re</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Reano">Reano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Revello">Revello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ribordone">Ribordone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rifreddo">Rifreddo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rima San Giuseppe">Rima San Giuseppe</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rimasco">Rimasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rimella">Rimella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rittana">Rittana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Riva Valdobbia">Riva Valdobbia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rivara">Rivara</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roaschia">Roaschia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roascio">Roascio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Robilante">Robilante</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roburent">Roburent</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rocca Canavese">Rocca Canavese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rocca Cigliè">Rocca Cigliè</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccabruna">Roccabruna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccaforte Ligure">Roccaforte Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccaforte Mondovì">Roccaforte Mondovì</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccasparvera">Roccasparvera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccaverano">Roccaverano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roccavione">Roccavione</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rocchetta Belbo">Rocchetta Belbo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rocchetta Ligure">Rocchetta Ligure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roletto">Roletto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ronco Biellese">Ronco Biellese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ronco Canavese">Ronco Canavese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rorà">Rorà</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rosazza">Rosazza</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rossa">Rossa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rossana">Rossana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Roure">Roure</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rubiana">Rubiana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Rueglio">Rueglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sabbia">Sabbia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sagliano Micca">Sagliano Micca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sala Biellese">Sala Biellese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Salbertrand">Salbertrand</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sale San Giovanni">Sale San Giovanni</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sale delle Langhe">Sale delle Langhe</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Saliceto">Saliceto</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Saluzzo">Saluzzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Salza di Pinerolo">Salza di Pinerolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sambuco">Sambuco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sampeyre">Sampeyre</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Benedetto Belbo">San Benedetto Belbo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Bernardino Verbano">San Bernardino Verbano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Colombano Belmonte">San Colombano Belmonte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Damiano Macra">San Damiano Macra</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Didero">San Didero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Germano Chisone">San Germano Chisone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Giorgio Scarampi">San Giorgio Scarampi</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Giorio di Susa">San Giorio di Susa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Maurizio d&apos;Opaglio">San Maurizio d&apos;Opaglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Michele Mondovì">San Michele Mondovì</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Paolo Cervo">San Paolo Cervo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Pietro Val Lemina">San Pietro Val Lemina</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Sebastiano Curone">San Sebastiano Curone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="San Secondo di Pinerolo">San Secondo di Pinerolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sanfront">Sanfront</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sangano">Sangano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sant&apos;Ambrogio di Torino">Sant&apos;Ambrogio di Torino</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sant&apos;Antonino di Susa">Sant&apos;Antonino di Susa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Santa Maria Maggiore">Santa Maria Maggiore</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sauze d&apos;Oulx">Sauze d&apos;Oulx</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sauze di Cesana">Sauze di Cesana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Scagnello">Scagnello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Scopa">Scopa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Scopello">Scopello</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Selve Marcone">Selve Marcone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Seppiana">Seppiana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Serole">Serole</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Serravalle Langhe">Serravalle Langhe</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Serravalle Scrivia">Serravalle Scrivia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sessame">Sessame</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sestriere">Sestriere</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Settimo Vittone">Settimo Vittone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Somano">Somano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Soprana">Soprana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sordevolo">Sordevolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sostegno">Sostegno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Sparone">Sparone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Spigno Monferrato">Spigno Monferrato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Stazzano">Stazzano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Stresa">Stresa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Strona">Strona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Stroppo">Stroppo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Susa">Susa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Tagliolo Monferrato">Tagliolo Monferrato</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Tavagnasco">Tavagnasco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Tavigliano">Tavigliano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Ternengo">Ternengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Toceno">Toceno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Tollegno">Tollegno</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Torrazzo">Torrazzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Torre Bormida">Torre Bormida</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Torre Mondovì">Torre Mondovì</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Torre Pellice">Torre Pellice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Torresina">Torresina</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trana">Trana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trarego Viggiona">Trarego Viggiona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trasquera">Trasquera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trausella">Trausella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Traversella">Traversella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Traves">Traves</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trivero">Trivero</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Trontano">Trontano</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Usseaux">Usseaux</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Usseglio">Usseglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vaie">Vaie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Val della Torre">Val della Torre</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valdengo">Valdengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valdieri">Valdieri</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valduggia">Valduggia</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valgioie">Valgioie</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valgrana">Valgrana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vallanzengo">Vallanzengo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valle Mosso">Valle Mosso</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valle San Nicolao">Valle San Nicolao</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vallo Torinese">Vallo Torinese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valloriate">Valloriate</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valmala">Valmala</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valperga">Valperga</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valprato Soana">Valprato Soana</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Valstrona">Valstrona</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vanzone con San Carlo">Vanzone con San Carlo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Varallo">Varallo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Varisella">Varisella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Varzo">Varzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Veglio">Veglio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Venasca">Venasca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Venaus">Venaus</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vernante">Vernante</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Verzuolo">Verzuolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vesime">Vesime</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vico Canavese">Vico Canavese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vicoforte">Vicoforte</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vidracco">Vidracco</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Viganella">Viganella</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vigliano Biellese">Vigliano Biellese</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vignole Borbera">Vignole Borbera</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vignolo">Vignolo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vignone">Vignone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villadossola">Villadossola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villanova Mondovì">Villanova Mondovì</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villar Dora">Villar Dora</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villar Focchiardo">Villar Focchiardo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villar Pellice">Villar Pellice</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villar Perosa">Villar Perosa</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villar San Costanzo">Villar San Costanzo</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Villette">Villette</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vinadio">Vinadio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Viola">Viola</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vistrorio">Vistrorio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Viù">Viù</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vocca">Vocca</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Vogogna">Vogogna</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Voltaggio">Voltaggio</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Zimone">Zimone</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Zubiena">Zubiena</option>';
+            Comunemontano_PSRn50340su1206_options_str  += '<option value="Zumaglia">Zumaglia</option>';
+            sel_Comunemontano_PSRn50340su1206.innerHTML = Comunemontano_PSRn50340su1206_options_str;
+            div_Comunemontano_PSRn50340su1206.appendChild(sel_Comunemontano_PSRn50340su1206);
+            var lab_Comunemontano_PSRn50340su1206 = document.createElement('div');
+            lab_Comunemontano_PSRn50340su1206.innerHTML = 'Comune montano_PSR (n.503+40 su 1.206)';
+            lab_Comunemontano_PSRn50340su1206.className = 'filterlabel';
+            div_Comunemontano_PSRn50340su1206.appendChild(lab_Comunemontano_PSRn50340su1206);
+            var reset_Comunemontano_PSRn50340su1206 = document.createElement('div');
+            reset_Comunemontano_PSRn50340su1206.innerHTML = 'clear filter';
+            reset_Comunemontano_PSRn50340su1206.className = 'filterlabel';
+            reset_Comunemontano_PSRn50340su1206.onclick = function() {
+                var options = document.getElementById("sel_Comunemontano_PSRn50340su1206").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Comunemontano_PSRn50340su1206.appendChild(reset_Comunemontano_PSRn50340su1206);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_ComuneMontagnainterna_Istatn333su1181 = document.createElement('div');
+            div_ComuneMontagnainterna_Istatn333su1181.id = "div_ComuneMontagnainterna_Istatn333su1181";
+            div_ComuneMontagnainterna_Istatn333su1181.className= "filterselect";
+            document.getElementById("menu").appendChild(div_ComuneMontagnainterna_Istatn333su1181);
+            sel_ComuneMontagnainterna_Istatn333su1181 = document.createElement('select');
+            sel_ComuneMontagnainterna_Istatn333su1181.multiple = true;
+            sel_ComuneMontagnainterna_Istatn333su1181.size = 10;
+            sel_ComuneMontagnainterna_Istatn333su1181.id = "sel_ComuneMontagnainterna_Istatn333su1181";
+            var ComuneMontagnainterna_Istatn333su1181_options_str = "<option value='' unselected></option>";
+            sel_ComuneMontagnainterna_Istatn333su1181.onchange = function(){filterFunc()};
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Acceglio">Acceglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ailoche">Ailoche</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Aisone">Aisone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ala di Stura">Ala di Stura</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Alagna Valsesia">Alagna Valsesia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Albera Ligure">Albera Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Alpette">Alpette</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Alto">Alto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Alto Sermenza">Alto Sermenza</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ameno">Ameno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Andorno Micca">Andorno Micca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Andrate">Andrate</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Angrogna">Angrogna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Antrona Schieranco">Antrona Schieranco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Anzola d&apos;Ossola">Anzola d&apos;Ossola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Argentera">Argentera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Arizzano">Arizzano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Armeno">Armeno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Arola">Arola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Aurano">Aurano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Baceno">Baceno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bagnasco">Bagnasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Balme">Balme</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Balmuccia">Balmuccia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bannio Anzino">Bannio Anzino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bardonecchia">Bardonecchia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Battifollo">Battifollo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Baveno">Baveno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bee">Bee</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bellino">Bellino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bernezzo">Bernezzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Beura-Cardezza">Beura-Cardezza</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bobbio Pellice">Bobbio Pellice</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Boccioleto">Boccioleto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bognanco">Bognanco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Borgiallo">Borgiallo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Borgo San Dalmazzo">Borgo San Dalmazzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Borgomezzavalle">Borgomezzavalle</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Borgone Susa">Borgone Susa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Borgosesia">Borgosesia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bosio">Bosio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Boves">Boves</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Briga Alta">Briga Alta</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Brossasco">Brossasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Brosso">Brosso</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Brovello-Carpugnino">Brovello-Carpugnino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bruzolo">Bruzolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Bussoleno">Bussoleno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cabella Ligure">Cabella Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Calasca-Castiglione">Calasca-Castiglione</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Callabiana">Callabiana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Camandona">Camandona</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cambiasca">Cambiasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Campertogno">Campertogno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Campiglia Cervo">Campiglia Cervo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Canischio">Canischio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cannero Riviera">Cannero Riviera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cannobio">Cannobio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Canosio">Canosio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cantalupo Ligure">Cantalupo Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cantoira">Cantoira</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Caprauna">Caprauna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Caprezzo">Caprezzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Caprie">Caprie</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Caprile">Caprile</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Carcoforo">Carcoforo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Carema">Carema</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Carrega Ligure">Carrega Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cartignano">Cartignano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Casale Corte Cerro">Casale Corte Cerro</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Casteldelfino">Casteldelfino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Castelmagno">Castelmagno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Castelnuovo Nigra">Castelnuovo Nigra</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Castelnuovo di Ceva">Castelnuovo di Ceva</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Celle di Macra">Celle di Macra</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ceppo Morelli">Ceppo Morelli</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ceres">Ceres</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ceresole Reale">Ceresole Reale</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cervasca">Cervasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cervatto">Cervatto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cesana Torinese">Cesana Torinese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cesara">Cesara</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chialamberto">Chialamberto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chianocco">Chianocco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chiesanuova">Chiesanuova</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chiomonte">Chiomonte</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chiusa di Pesio">Chiusa di Pesio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Chiusa di San Michele">Chiusa di San Michele</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cintano">Cintano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Civiasco">Civiasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Claviere">Claviere</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Coassolo Torinese">Coassolo Torinese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Coazze">Coazze</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Coggiola">Coggiola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Colleretto Castelnuovo">Colleretto Castelnuovo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Condove">Condove</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Corio">Corio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cossogno">Cossogno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Cravagliana">Cravagliana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Craveggia">Craveggia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Crevoladossola">Crevoladossola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Crissolo">Crissolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Crodo">Crodo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Demonte">Demonte</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Domodossola">Domodossola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Donato">Donato</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Dronero">Dronero</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Druogno">Druogno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Elva">Elva</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Entracque">Entracque</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Exilles">Exilles</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Fabbrica Curone">Fabbrica Curone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Fenestrelle">Fenestrelle</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Fobello">Fobello</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Formazza">Formazza</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Forno Canavese">Forno Canavese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Frabosa Soprana">Frabosa Soprana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Frabosa Sottana">Frabosa Sottana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Fraconalto">Fraconalto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Frassinetto">Frassinetto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Frassino">Frassino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gaiola">Gaiola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Garessio">Garessio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Germagnano">Germagnano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Germagno">Germagno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ghiffa">Ghiffa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Giaglione">Giaglione</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Giaveno">Giaveno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gignese">Gignese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Graglia">Graglia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gravellona Toce">Gravellona Toce</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gravere">Gravere</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gremiasco">Gremiasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Groscavallo">Groscavallo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Guardabosone">Guardabosone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Gurro">Gurro</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ingria">Ingria</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Intragna">Intragna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Inverso Pinasca">Inverso Pinasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Isasca">Isasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Issiglio">Issiglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Lemie">Lemie</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Limone Piemonte">Limone Piemonte</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Lisio">Lisio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Locana">Locana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Loreglia">Loreglia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Macra">Macra</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Macugnaga">Macugnaga</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Madonna del Sasso">Madonna del Sasso</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Malesco">Malesco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Marmora">Marmora</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Masera">Masera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Massello">Massello</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Massino Visconti">Massino Visconti</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Massiola">Massiola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mattie">Mattie</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Meana di Susa">Meana di Susa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Melle">Melle</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mergozzo">Mergozzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mezzenile">Mezzenile</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Miagliano">Miagliano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Miasino">Miasino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Miazzina">Miazzina</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Moiola">Moiola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mollia">Mollia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mompantero">Mompantero</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Monastero di Lanzo">Monastero di Lanzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Monasterolo Casotto">Monasterolo Casotto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Moncenisio">Moncenisio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Mongiardino Ligure">Mongiardino Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montacuto">Montacuto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montaldo di Mondovi&apos;">Montaldo di Mondovi&apos;</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montecrestese">Montecrestese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montemale di Cuneo">Montemale di Cuneo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Monterosso Grana">Monterosso Grana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montescheno">Montescheno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Montezemolo">Montezemolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Muzzano">Muzzano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Netro">Netro</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Noasca">Noasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Nomaglio">Nomaglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Nonio">Nonio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Novalesa">Novalesa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Nucetto">Nucetto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Occhieppo Superiore">Occhieppo Superiore</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Oggebbio">Oggebbio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Omegna">Omegna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Oncino">Oncino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ormea">Ormea</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ornavasso">Ornavasso</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Orta San Giulio">Orta San Giulio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ostana">Ostana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Oulx">Oulx</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Paesana">Paesana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pallanzeno">Pallanzeno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pamparato">Pamparato</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pella">Pella</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Perlo">Perlo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Perosa Argentina">Perosa Argentina</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Perrero">Perrero</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pessinetto">Pessinetto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pettenasco">Pettenasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Peveragno">Peveragno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Piedicavallo">Piedicavallo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Piedimulera">Piedimulera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pietraporzio">Pietraporzio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pieve Vergonte">Pieve Vergonte</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pila">Pila</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pinasca">Pinasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Piode">Piode</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pogno">Pogno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pollone">Pollone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pomaretto">Pomaretto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pont Canavese">Pont Canavese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pontechianale">Pontechianale</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Porte">Porte</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Portula">Portula</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Postua">Postua</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pradleves">Pradleves</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pragelato">Pragelato</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Prali">Prali</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pralungo">Pralungo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pramollo">Pramollo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Prarostino">Prarostino</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pratiglione">Pratiglione</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Pray">Pray</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Prazzo">Prazzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Premeno">Premeno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Premia">Premia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Premosello-Chiovenda">Premosello-Chiovenda</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Priero">Priero</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Priola">Priola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Quarna Sopra">Quarna Sopra</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Quarna Sotto">Quarna Sotto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Quarona">Quarona</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Quincinetto">Quincinetto</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rassa">Rassa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Re">Re</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ribordone">Ribordone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rimella">Rimella</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rittana">Rittana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roaschia">Roaschia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Robilante">Robilante</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roburent">Roburent</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roccabruna">Roccabruna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roccaforte Ligure">Roccaforte Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roccaforte Mondovi&apos;">Roccaforte Mondovi&apos;</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roccasparvera">Roccasparvera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roccavione">Roccavione</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rocchetta Ligure">Rocchetta Ligure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Ronco Canavese">Ronco Canavese</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rora&apos;">Rora&apos;</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rosazza">Rosazza</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rossa">Rossa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rossana">Rossana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Roure">Roure</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rubiana">Rubiana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Rueglio">Rueglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sagliano Micca">Sagliano Micca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Salbertrand">Salbertrand</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Salza di Pinerolo">Salza di Pinerolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sambuco">Sambuco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sampeyre">Sampeyre</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Bernardino Verbano">San Bernardino Verbano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Damiano Macra">San Damiano Macra</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Didero">San Didero</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Germano Chisone">San Germano Chisone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Giorio di Susa">San Giorio di Susa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Maurizio d&apos;Opaglio">San Maurizio d&apos;Opaglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="San Pietro Val Lemina">San Pietro Val Lemina</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sanfront">Sanfront</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sant&apos;Antonino di Susa">Sant&apos;Antonino di Susa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Santa Maria Maggiore">Santa Maria Maggiore</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sauze d&apos;Oulx">Sauze d&apos;Oulx</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sauze di Cesana">Sauze di Cesana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Scagnello">Scagnello</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Scopa">Scopa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Scopello">Scopello</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sestriere">Sestriere</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Settimo Vittone">Settimo Vittone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sordevolo">Sordevolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Sparone">Sparone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Stresa">Stresa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Stroppo">Stroppo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Susa">Susa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Tavagnasco">Tavagnasco</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Tavigliano">Tavigliano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Toceno">Toceno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Tollegno">Tollegno</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Torre Mondovi&apos;">Torre Mondovi&apos;</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Torre Pellice">Torre Pellice</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Trarego Viggiona">Trarego Viggiona</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Trasquera">Trasquera</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Traversella">Traversella</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Traves">Traves</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Trontano">Trontano</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Usseaux">Usseaux</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Usseglio">Usseglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="VERBANIA">VERBANIA</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vaie">Vaie</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Val della Torre">Val della Torre</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Val di Chy">Val di Chy</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valchiusa">Valchiusa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valdieri">Valdieri</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valdilana">Valdilana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valduggia">Valduggia</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valgioie">Valgioie</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valgrana">Valgrana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valle Cannobina">Valle Cannobina</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valloriate">Valloriate</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valprato Soana">Valprato Soana</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Valstrona">Valstrona</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vanzone con San Carlo">Vanzone con San Carlo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Varallo">Varallo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Varzo">Varzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Veglio">Veglio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Venasca">Venasca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Venaus">Venaus</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vernante">Vernante</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vignolo">Vignolo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vignone">Vignone</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villadossola">Villadossola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villar Focchiardo">Villar Focchiardo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villar Pellice">Villar Pellice</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villar Perosa">Villar Perosa</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villar San Costanzo">Villar San Costanzo</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Villette">Villette</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vinadio">Vinadio</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Viola">Viola</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Viu&apos;">Viu&apos;</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vocca">Vocca</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Vogogna">Vogogna</option>';
+            ComuneMontagnainterna_Istatn333su1181_options_str  += '<option value="Voltaggio">Voltaggio</option>';
+            sel_ComuneMontagnainterna_Istatn333su1181.innerHTML = ComuneMontagnainterna_Istatn333su1181_options_str;
+            div_ComuneMontagnainterna_Istatn333su1181.appendChild(sel_ComuneMontagnainterna_Istatn333su1181);
+            var lab_ComuneMontagnainterna_Istatn333su1181 = document.createElement('div');
+            lab_ComuneMontagnainterna_Istatn333su1181.innerHTML = 'Comune Montagna interna_Istat (n.333 su 1.181)';
+            lab_ComuneMontagnainterna_Istatn333su1181.className = 'filterlabel';
+            div_ComuneMontagnainterna_Istatn333su1181.appendChild(lab_ComuneMontagnainterna_Istatn333su1181);
+            var reset_ComuneMontagnainterna_Istatn333su1181 = document.createElement('div');
+            reset_ComuneMontagnainterna_Istatn333su1181.innerHTML = 'clear filter';
+            reset_ComuneMontagnainterna_Istatn333su1181.className = 'filterlabel';
+            reset_ComuneMontagnainterna_Istatn333su1181.onclick = function() {
+                var options = document.getElementById("sel_ComuneMontagnainterna_Istatn333su1181").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_ComuneMontagnainterna_Istatn333su1181.appendChild(reset_ComuneMontagnainterna_Istatn333su1181);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_ComuneAreeInternen388su1181 = document.createElement('div');
+            div_ComuneAreeInternen388su1181.id = "div_ComuneAreeInternen388su1181";
+            div_ComuneAreeInternen388su1181.className= "filterselect";
+            document.getElementById("menu").appendChild(div_ComuneAreeInternen388su1181);
+            sel_ComuneAreeInternen388su1181 = document.createElement('select');
+            sel_ComuneAreeInternen388su1181.multiple = true;
+            sel_ComuneAreeInternen388su1181.size = 10;
+            sel_ComuneAreeInternen388su1181.id = "sel_ComuneAreeInternen388su1181";
+            var ComuneAreeInternen388su1181_options_str = "<option value='' unselected></option>";
+            sel_ComuneAreeInternen388su1181.onchange = function(){filterFunc()};
+            ComuneAreeInternen388su1181_options_str  += '<option value="Acceglio">Acceglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Acqui Terme">Acqui Terme</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ailoche">Ailoche</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Aisone">Aisone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ala di Stura">Ala di Stura</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Alagna Valsesia">Alagna Valsesia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Albera Ligure">Albera Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Alice Bel Colle">Alice Bel Colle</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Alpette">Alpette</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Alto">Alto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Alto Sermenza">Alto Sermenza</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ameno">Ameno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Angrogna">Angrogna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Antrona Schieranco">Antrona Schieranco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Argentera">Argentera</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Arguello">Arguello</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Armeno">Armeno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Arola">Arola</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Aurano">Aurano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Avolasca">Avolasca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bagnasco">Bagnasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Balangero">Balangero</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Balme">Balme</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Balmuccia">Balmuccia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bannio Anzino">Bannio Anzino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Barbania">Barbania</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bardonecchia">Bardonecchia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Barge">Barge</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Battifollo">Battifollo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Belgirate">Belgirate</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bellino">Bellino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Belvedere Langhe">Belvedere Langhe</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bergolo">Bergolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bistagno">Bistagno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bobbio Pellice">Bobbio Pellice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Boca">Boca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Boccioleto">Boccioleto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bogogno">Bogogno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bolzano Novarese">Bolzano Novarese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bonvicino">Bonvicino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Borgiallo">Borgiallo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Borgomanero">Borgomanero</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Borgosesia">Borgosesia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bosia">Bosia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bossolasco">Bossolasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Briga Alta">Briga Alta</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Briga Novarese">Briga Novarese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Brignano-Frascata">Brignano-Frascata</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Brossasco">Brossasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Brosso">Brosso</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Bubbio">Bubbio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Busano">Busano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cabella Ligure">Cabella Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cafasse">Cafasse</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Calamandrana">Calamandrana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Calasca-Castiglione">Calasca-Castiglione</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Calosso">Calosso</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Camerana">Camerana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Campertogno">Campertogno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Canelli">Canelli</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Canischio">Canischio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cannobio">Cannobio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Canosio">Canosio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cantalupo Ligure">Cantalupo Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cantoira">Cantoira</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Caprauna">Caprauna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Caprile">Caprile</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Carcoforo">Carcoforo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Carpeneto">Carpeneto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Carrega Ligure">Carrega Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cartignano">Cartignano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cartosio">Cartosio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Casaleggio Boiro">Casaleggio Boiro</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Casasco">Casasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cassinasco">Cassinasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cassinelle">Cassinelle</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castel Boglione">Castel Boglione</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castel Rocchero">Castel Rocchero</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Casteldelfino">Casteldelfino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelletto Merli">Castelletto Merli</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelletto Molina">Castelletto Molina</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelletto Uzzone">Castelletto Uzzone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelletto d&apos;Erro">Castelletto d&apos;Erro</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelmagno">Castelmagno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelnuovo Nigra">Castelnuovo Nigra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castelnuovo di Ceva">Castelnuovo di Ceva</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castiglione Tinella">Castiglione Tinella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Castino">Castino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cavaglio d&apos;Agogna">Cavaglio d&apos;Agogna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cavallirio">Cavallirio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cavatore">Cavatore</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cellarengo">Cellarengo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Celle di Macra">Celle di Macra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cellio con Breia">Cellio con Breia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ceppo Morelli">Ceppo Morelli</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ceres">Ceres</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ceresole Reale">Ceresole Reale</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cerreto Grue">Cerreto Grue</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cerretto Langhe">Cerretto Langhe</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cervatto">Cervatto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cesana Torinese">Cesana Torinese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cesara">Cesara</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cessole">Cessole</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Chialamberto">Chialamberto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Chiesanuova">Chiesanuova</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Chiomonte">Chiomonte</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cintano">Cintano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cirie&apos;">Cirie&apos;</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cissone">Cissone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Civiasco">Civiasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Claviere">Claviere</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Coassolo Torinese">Coassolo Torinese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cocconato">Cocconato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Coggiola">Coggiola</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Colazza">Colazza</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Colleretto Castelnuovo">Colleretto Castelnuovo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Corio">Corio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cortemilia">Cortemilia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cossano Belbo">Cossano Belbo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cravagliana">Cravagliana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cravanzana">Cravanzana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cremolino">Cremolino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Crevacuore">Crevacuore</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Crissolo">Crissolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cunico">Cunico</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cuorgne&apos;">Cuorgne&apos;</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Cureggio">Cureggio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Demonte">Demonte</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Denice">Denice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Dernice">Dernice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Elva">Elva</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Entracque">Entracque</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Envie">Envie</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Exilles">Exilles</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Fabbrica Curone">Fabbrica Curone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Favria">Favria</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Feisoglio">Feisoglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Fenestrelle">Fenestrelle</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Fobello">Fobello</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Fontanile">Fontanile</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Formazza">Formazza</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Forno Canavese">Forno Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Fraconalto">Fraconalto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Frassinetto">Frassinetto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Frassino">Frassino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Front">Front</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gabiano">Gabiano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gambasca">Gambasca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Garbagna">Garbagna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Garessio">Garessio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gargallo">Gargallo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gattinara">Gattinara</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Germagnano">Germagnano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Germagno">Germagno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ghemme">Ghemme</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ghislarengo">Ghislarengo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Giaglione">Giaglione</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gignese">Gignese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gorzegno">Gorzegno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gottasecca">Gottasecca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gozzano">Gozzano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gravere">Gravere</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Grazzano Badoglio">Grazzano Badoglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gremiasco">Gremiasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Grignasco">Grignasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Grognardo">Grognardo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Groscavallo">Groscavallo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Grosso">Grosso</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Guardabosone">Guardabosone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Gurro">Gurro</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Igliano">Igliano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Incisa Scapaccino">Incisa Scapaccino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ingria">Ingria</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Isasca">Isasca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lanzo Torinese">Lanzo Torinese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lemie">Lemie</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lenta">Lenta</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lerma">Lerma</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lesa">Lesa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Levice">Levice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Levone">Levone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Limone Piemonte">Limone Piemonte</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Loazzolo">Loazzolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Locana">Locana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Loreglia">Loreglia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Lozzolo">Lozzolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Macra">Macra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Macugnaga">Macugnaga</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Madonna del Sasso">Madonna del Sasso</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Maggiora">Maggiora</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Malvicino">Malvicino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Marano Ticino">Marano Ticino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Maranzana">Maranzana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Marmora">Marmora</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Massello">Massello</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Massino Visconti">Massino Visconti</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Massiola">Massiola</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mathi">Mathi</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mattie">Mattie</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Meana di Susa">Meana di Susa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Meina">Meina</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Melazzo">Melazzo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Melle">Melle</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Merana">Merana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mezzenile">Mezzenile</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mezzomerico">Mezzomerico</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Miasino">Miasino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Molare">Molare</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mollia">Mollia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mombaldone">Mombaldone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mombarcaro">Mombarcaro</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mombaruzzo">Mombaruzzo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mompantero">Mompantero</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Momperone">Momperone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Monastero Bormida">Monastero Bormida</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Monastero di Lanzo">Monastero di Lanzo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Moncenisio">Moncenisio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Moncestino">Moncestino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Monesiglio">Monesiglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mongiardino Ligure">Mongiardino Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Monta&apos;">Monta&apos;</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montabone">Montabone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montacuto">Montacuto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montafia">Montafia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montaldeo">Montaldeo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montaldo Bormida">Montaldo Bormida</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montechiaro d&apos;Acqui">Montechiaro d&apos;Acqui</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montemale di Cuneo">Montemale di Cuneo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montemarzino">Montemarzino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montezemolo">Montezemolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Montiglio Monferrato">Montiglio Monferrato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Morbello">Morbello</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Mornese">Mornese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Morsasco">Morsasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Murazzano">Murazzano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Murisengo">Murisengo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Nebbiuno">Nebbiuno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Niella Belbo">Niella Belbo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Nizza Monferrato">Nizza Monferrato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Noasca">Noasca</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Nole">Nole</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Nonio">Nonio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Novalesa">Novalesa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Odalengo Grande">Odalengo Grande</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Odalengo Piccolo">Odalengo Piccolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Oleggio">Oleggio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Olmo Gentile">Olmo Gentile</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Oncino">Oncino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ormea">Ormea</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Orsara Bormida">Orsara Bormida</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Orta San Giulio">Orta San Giulio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ostana">Ostana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Oulx">Oulx</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ovada">Ovada</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Paesana">Paesana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pareto">Pareto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Paroldo">Paroldo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pella">Pella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Perletto">Perletto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Perlo">Perlo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Perrero">Perrero</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pertusio">Pertusio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pessinetto">Pessinetto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pettenasco">Pettenasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pezzolo Valle Uzzone">Pezzolo Valle Uzzone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pietraporzio">Pietraporzio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pila">Pila</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Piode">Piode</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Piova&apos;  Massaia">Piova&apos;  Massaia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pogno">Pogno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pombia">Pombia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pont Canavese">Pont Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pontechianale">Pontechianale</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ponti">Ponti</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ponzone">Ponzone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Portula">Portula</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Postua">Postua</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pradleves">Pradleves</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pragelato">Pragelato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prali">Prali</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pralormo">Pralormo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prasco">Prasco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prascorsano">Prascorsano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pratiglione">Pratiglione</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prato Sesia">Prato Sesia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Pray">Pray</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prazzo">Prazzo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Priola">Priola</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Prunetto">Prunetto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Quaranti">Quaranti</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Quarna Sopra">Quarna Sopra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Quarna Sotto">Quarna Sotto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Quarona">Quarona</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rassa">Rassa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ribordone">Ribordone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ricaldone">Ricaldone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rifreddo">Rifreddo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rimella">Rimella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rivalta Bormida">Rivalta Bormida</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rivara">Rivara</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rivarolo Canavese">Rivarolo Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roascio">Roascio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Robella">Robella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rocca Canavese">Rocca Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rocca Grimalda">Rocca Grimalda</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roccabruna">Roccabruna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roccaforte Ligure">Roccaforte Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roccaverano">Roccaverano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rocchetta Belbo">Rocchetta Belbo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rocchetta Ligure">Rocchetta Ligure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rocchetta Palafea">Rocchetta Palafea</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roddino">Roddino</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Romagnano Sesia">Romagnano Sesia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Ronco Canavese">Ronco Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="RorÃ ">RorÃ </option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Rossa">Rossa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Roure">Roure</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Salbertrand">Salbertrand</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Saliceto">Saliceto</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Salza di Pinerolo">Salza di Pinerolo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sambuco">Sambuco</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sampeyre">Sampeyre</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Benedetto Belbo">San Benedetto Belbo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Carlo Canavese">San Carlo Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Colombano Belmonte">San Colombano Belmonte</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Damiano Macra">San Damiano Macra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Francesco al Campo">San Francesco al Campo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Giorgio Scarampi">San Giorgio Scarampi</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Maurizio Canavese">San Maurizio Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Maurizio d&apos;Opaglio">San Maurizio d&apos;Opaglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="San Sebastiano Curone">San Sebastiano Curone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sanfront">Sanfront</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Santo Stefano Belbo">Santo Stefano Belbo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sauze d&apos;Oulx">Sauze d&apos;Oulx</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sauze di Cesana">Sauze di Cesana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Scopa">Scopa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Scopello">Scopello</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Serole">Serole</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Serravalle Langhe">Serravalle Langhe</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Serravalle Sesia">Serravalle Sesia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sessame">Sessame</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sestriere">Sestriere</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Somano">Somano</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Soriso">Soriso</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sostegno">Sostegno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Sparone">Sparone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Spigno Monferrato">Spigno Monferrato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Strevi">Strevi</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Stroppo">Stroppo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Suno">Suno</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Susa">Susa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Tagliolo Monferrato">Tagliolo Monferrato</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Terzo">Terzo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Torre Bormida">Torre Bormida</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Torre Pellice">Torre Pellice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Torresina">Torresina</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Trarego Viggiona">Trarego Viggiona</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Trasquera">Trasquera</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Traversella">Traversella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Traves">Traves</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Trisobbio">Trisobbio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Usseaux">Usseaux</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Usseglio">Usseglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vaglio Serra">Vaglio Serra</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valchiusa">Valchiusa</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valdilana">Valdilana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valduggia">Valduggia</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valle Cannobina">Valle Cannobina</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valperga">Valperga</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valprato Soana">Valprato Soana</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Valstrona">Valstrona</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vanzone con San Carlo">Vanzone con San Carlo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vaprio d&apos;Agogna">Vaprio d&apos;Agogna</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Varallo">Varallo</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Varisella">Varisella</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vauda Canavese">Vauda Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Venaus">Venaus</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vesime">Vesime</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Viale">Viale</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Villadeati">Villadeati</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Villamiroglio">Villamiroglio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Villanova Canavese">Villanova Canavese</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Villar Pellice">Villar Pellice</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vinadio">Vinadio</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Viola">Viola</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Visone">Visone</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Viu&apos;">Viu&apos;</option>';
+            ComuneAreeInternen388su1181_options_str  += '<option value="Vocca">Vocca</option>';
+            sel_ComuneAreeInternen388su1181.innerHTML = ComuneAreeInternen388su1181_options_str;
+            div_ComuneAreeInternen388su1181.appendChild(sel_ComuneAreeInternen388su1181);
+            var lab_ComuneAreeInternen388su1181 = document.createElement('div');
+            lab_ComuneAreeInternen388su1181.innerHTML = 'Comune Aree Interne (n.388 su 1.181)';
+            lab_ComuneAreeInternen388su1181.className = 'filterlabel';
+            div_ComuneAreeInternen388su1181.appendChild(lab_ComuneAreeInternen388su1181);
+            var reset_ComuneAreeInternen388su1181 = document.createElement('div');
+            reset_ComuneAreeInternen388su1181.innerHTML = 'clear filter';
+            reset_ComuneAreeInternen388su1181.className = 'filterlabel';
+            reset_ComuneAreeInternen388su1181.onclick = function() {
+                var options = document.getElementById("sel_ComuneAreeInternen388su1181").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_ComuneAreeInternen388su1181.appendChild(reset_ComuneAreeInternen388su1181);
+        resetLabels([layer_Province_0,layer_Piemonte_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Province_0,layer_Piemonte_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Province_0,layer_Piemonte_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Province_0,layer_Piemonte_1]);
+        });
+        </script>
+    </body>
+</html>
